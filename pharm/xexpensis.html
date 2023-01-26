@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme</title>
+    <!-- Material app -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <!-- style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <!-- <img src="./images/logo.jpeg"> -->
+                    <h2>SUP<span class="compel">REME</span></h2>
+                    <h2>MEDICALS</h2>
+                </div>
+                <div class="closeBTN" id="close-btn"><span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sideBar">
+                <a href="xadmin.html">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="sales.html">
+                    <span class="material-icons-sharp">money</span>
+                    <h3>Sales</h3>
+                </a>
+                <a href="xrecords.html">
+                    <span class="material-icons-sharp">local_library</span>
+                    <h3>Sales Records</h3>
+                </a>
+                <a href="xuser.html">
+                    <span class="material-icons-sharp">person_outline</span>
+                    <h3>Manage User</h3>
+                </a>
+
+                <a href="xcustomers.html">
+                    <span class="material-icons-sharp">people</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="xstockmanagement.html">
+                    <span class="material-icons-sharp">local_library</span>
+                    <h3>Stock Management</h3>
+                </a>
+
+                <a href="xexpensis.html" class="active">
+                    <span class="material-icons-sharp">calendar_month</span>
+                    <h3>Expense Records</h3>
+                </a>
+                <a href="xreport.html">
+                    <span class="material-icons-sharp">grading</span>
+                    <h3>Reports</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!------------ END OF ASIDE ------------>
+        <main>
+            <h1></h1>
+
+
+
+            <!-- ---------END OF EXAM-------- -->
+            <div class="recent-sales">
+                <h1>Expensis</h1>
+                <?php
+                require 'config.php'; 
+                ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Cost</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <?php 
+                	$query = mysqli_query($conn, "SELECT expensisid, description, cost, date FROM expensis ORDER BY expensisid");
+                	while($row = mysqli_fetch_array($query)){
+                
+                		
+                		$expensisid = $row['expensisid'];
+                		$description = $row['description'];
+                        $cost = $row['cost'];
+                        $date = $row['date'];
+                		
+                 ?>
+                    <tbody>
+                        <tr>
+
+                            <td>
+                                <?php echo $expensisid; ?>
+                            </td>
+                            <td>
+                                <?php echo $description; ?>
+                            </td>
+                            <td>
+                                <?php echo $cost; ?>
+                            </td>
+                            <td>
+                                <?php echo $date; ?>
+                            </td>
+                            
+                    </tbody>
+                    <?php 	} ?>
+                </table>
+        </main>
+        <!-- ----------END OF MAIN----------- -->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Joshua</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="./images/logo.jpeg">
+                    </div>
+                </div>
+            </div>
+            <!-- END OF TOP -->
+            <!-- <div class="recent-updates">
+                <h2>Notifications</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="./images/logo.jpeg">
+                        </div>
+                        <div class="message">
+                            <p>First Term Exam starts on 23rd March 2022</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="./images/logo.jpeg">
+                        </div>
+                        <div class="message">
+                            <p>Notifications goes in here</p>
+                            <small class="text-muted">23/04/2022</small>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- -----------END OF RECENT UPDATE--------------- -->
+            <div class="sales-analytics">
+
+                <a href="xnewUser.html">
+                    <div class="item add-product">
+                        <div>
+                            <span class="material-icons-sharp">add</span>
+                            <h3>New Expense</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script/scrip.js"></script>
+</body>
+
+</html>
+
+<!-- live data -->
+<script>
+    function loadXMLDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("link_wrapper").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "server.php", true);
+        xhttp.send();
+    }
+    setInterval(function () {
+        loadXMLDoc();
+        // 1sec
+    }, 1000);
+
+    window.onload = loadXMLDoc;
+</script>
+
+<!-- Maximum reading -->
+<script>
+    function loadXMLDoc1() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("link_wrapper1").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "server1.php", true);
+        xhttp.send();
+    }
+    setInterval(function () {
+        loadXMLDoc1();
+        // 1sec
+    }, 1000);
+
+    window.onload = loadXMLDoc1;
+</script>
+<!-- Minimum reading -->
+<script>
+    function loadXMLDoc2() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("link_wrapper2").innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "server2.php", true);
+        xhttp.send();
+    }
+    setInterval(function () {
+        loadXMLDoc2();
+        // 1sec
+    }, 1000);
+
+    window.onload = loadXMLDoc2;
+</script>

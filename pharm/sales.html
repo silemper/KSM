@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme</title>
+    <!-- Material app -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <!-- style -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="style.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <!-- <img src="./images/logo.jpeg"> -->
+                    <h2>SUP<span class="compel">REME</span></h2>
+                    <h2>MEDICALS</h2>
+                </div>
+                <div class="closeBTN" id="close-btn"><span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+            <div class="sideBar">
+               <a href="sales.html">
+                    <span class="material-icons-sharp">money</span>
+                    <h3>Sales</h3>
+                </a>
+
+                <a href="xcustomers.html">
+                    <span class="material-icons-sharp">people</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="xexpensisInput.html">
+                    <span class="material-icons-sharp">calendar_month</span>
+                    <h3>Expense</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!------------ END OF ASIDE ------------>
+        <main>
+            
+<!-- =================CART=================== -->
+            <div id="product-grid">
+                <div class="txt-heading">
+                    <h1>Products</h1>
+                </div>
+                <div id="product_item_container"></div>
+            </div>
+
+
+
+<!-- ==============END OF CART================ -->
+        </main>
+        <!-- ----------END OF MAIN----------- -->
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>
+                                <?php 
+                                require 'config.php';
+                            $query = mysqli_query($conn, "SELECT adminuser FROM admin ORDER BY adminID DESC LIMIT 1");
+                            while($row = mysqli_fetch_array($query)){
+                                $admin = $row['adminuser'];
+                            ?>
+                                <?php echo $admin; ?>
+                                <?php 	} ?>
+                            </b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                </div>
+            </div>
+            <!-- -----------END OF RECENT UPDATE--------------- -->
+           <!-- =======================CART LIST========================== -->
+            <div id="shopping-cart">
+                <div class="txt-heading">
+                    <h1>Shopping cart</h1>
+                </div>
+                <a onClick="emptyCart()" id="btnEmpty">Empty Cart</a>
+                
+                <form action="" method="post" name="form1"></form>
+                <table class="tbl-cart" cellpadding="10" cellspacing="5">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th class='text-right' width="15%">Unit Price</th>
+                            <th class='text-right' width="5%">Quantity</th>
+                            <th class='text-right' width="20%">Sub Total</th>
+                        </tr>
+                    </thead>
+                    <!--  Cart table to load data on "add to cart" action -->
+                    <tbody id="cartTableBody">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="text-right">Total:</td>
+                            <td id="itemCount" class="text-right" colspan="2"></td>
+                            <td id="totalAmount" class="text-right"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <input type="submit" name="Submit" value="Check Out" onclick="checkOutcart()"  id="btnCheckout">
+                <!-- <a onClick="checkOutcart()" id="btnCheckout">Check Out</a> -->
+            </form>
+            </div>
+                <!-- <a href="xnewProduct.html">
+                    <div class="item add-product">
+                        <div>
+                            <span class="material-icons-sharp">add</span>
+                            <h3>Add Product</h3>
+                        </div>
+                    </div>
+                </a> -->
+            </div>
+        </div>
+    </div>
+    <script src="script/scrip.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="cart.js"></script>
+</body>
+
